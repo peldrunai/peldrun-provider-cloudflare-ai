@@ -433,20 +433,31 @@ def _preflight(
                 )
             )
         else:
-            # Only proceed if every mention matches current.
+            # README.md is DOCUMENTATION, not a version carrier. Version
+            # strings inside it are almost always illustrative examples
+            # ("bump from v1.0.0 to v1.0.1"), not declarations of the
+            # current release. Treat any mismatch as a WARNING so a
+            # documentation edit never blocks a CI run.
+            #
+            # When every mention DOES match the current version, the
+            # script will still rewrite them on the next bump — that is
+            # the desired behavior for README files that display the
+            # live version (e.g. "This is v1.0.0"). Files with a mix of
+            # example and real versions should use the README-fix
+            # convention documented in CONTRIBUTING.md.
             mismatches = [v for v in found_versions if v != current_version]
             if mismatches:
-                errors.append(
-                    f"README.md mentions versions {mismatches!r} "
-                    f"that do not match {current_version!r}"
-                )
+                # Non-fatal: log a warning, do not change README.
                 updates.append(
                     FileUpdate(
                         path=_README_PATH,
                         found_version=",".join(found_versions),
                         new_version=None,
                         will_change=False,
-                        note="MISMATCH",
+                        note=(
+                            "warn: mentions "
+                            f"{sorted(mismatches)!r} (likely examples)"
+                        ),
                     )
                 )
             else:

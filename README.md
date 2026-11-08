@@ -213,8 +213,10 @@ python scripts/build_package.py --verify
 python scripts/verify_package.py
 
 # 4. Generate the catalog entry with the correct download URL
+#    Replace <TAG> and <VERSION> with the values from
+#    `python -c "import json; print(json.load(open('manifest.json'))['version'])"`
 python scripts/generate_catalog_entry.py \
-    --download-url "https://github.com/<owner>/<repo>/releases/download/v1.0.1/cloudflare-ai-1.0.1.zip" \
+    --download-url "https://github.com/<owner>/<repo>/releases/download/v<TAG>/cloudflare-ai-<VERSION>.zip" \
     --brand-color "#F38020" \
     --icon cloudflare
 
