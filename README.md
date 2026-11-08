@@ -226,10 +226,10 @@ python scripts/generate_catalog_entry.py \
 
 # 5. Commit and tag
 git add -A
-git commit -m "chore(release): v1.0.1"
-git tag -a v1.0.1 -m "Release v1.0.1"
+git commit -m "chore(release): v1.0.2"
+git tag -a v1.0.2 -m "Release v1.0.2"
 git push origin main
-git push origin v1.0.1   # triggers release.yml
+git push origin v1.0.2   # triggers release.yml
 ```
 
 The workflow verifies that the tag matches `manifest.json["version"]` and refuses to publish on a mismatch.
