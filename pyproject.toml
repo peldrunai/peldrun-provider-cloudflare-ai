@@ -107,10 +107,11 @@ minversion = "8.0"
 # -ra: show extra summary lines for all tests (skips, xfails, etc.)
 # --showlocals: include local variables in tracebacks on failure
 testpaths = ["tests"]
-# Async tests use pytest-asyncio's explicit mode — every async test
-# MUST be decorated with @pytest.mark.asyncio. This avoids silent
-# collection of unrelated coroutines.
-asyncio_mode = "strict"
+# Note: this package has no async tests. The `pytest-asyncio`
+# plugin is listed under [project.optional-dependencies].dev for
+# contributors who want to add live async tests locally, but CI
+# installs pytest alone — so `asyncio_mode` is deliberately NOT
+# set here (it would be an unknown option for a bare pytest run).
 # Filter warnings that are known-but-out-of-scope for this package.
 filterwarnings = [
     "error",

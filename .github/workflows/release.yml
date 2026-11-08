@@ -93,7 +93,11 @@ jobs:
         run: |
           python scripts/verify_package.py > verify.log 2>&1
           cat verify.log
-          SHA=$(grep -oE '^  sha256: +[0-9a-f]{64}' verify.log | awk '{print $2}')
+          # verify.log contains TWO sha256 lines — one in the detail
+          # block at the top, one in the summary at the bottom. Both
+          # carry the same digest, but only ONE line may be written to
+          # $GITHUB_OUTPUT per key. Extract the first match and stop.
+          SHA=$(grep -oE '^  sha256: +[0-9a-f]{64}' verify.log | head -1 | awk '{print $2}')
           if [ -z "$SHA" ]; then
             echo "::error::Could not extract SHA-256 from verify output."
             exit 1
@@ -102,15 +106,10 @@ jobs:
           echo "Extracted SHA-256: $SHA"
 
       - name: Generate catalog entry
-        env:
-          DOWNLOAD_URL: "https://github.com/${{ github.repository }}/releases/download/${{ steps.tag.outputs.tag }}/cloudflare-ai-${{ steps.tag.outputs.tag }}.zip"
-          # The download URL above uses the tag with the 'v' prefix.
-          # generate_catalog_entry.py reads the version from
-          # manifest.json and uses it for the ZIP filename inside the
-          # URL — the tag prefix appears only in the URL path segment
-          # (releases/download/<tag>/...), which GitHub serves as-is.
         run: |
-          # Compute the effective URL with the correct ZIP filename.
+          # Build the download URL from the tag (with 'v' prefix) and
+          # the version (without 'v' prefix). GitHub serves both
+          # verbatim — no rewriting is required.
           VERSION=$(python -c "import json; print(json.load(open('manifest.json'))['version'])")
           URL="https://github.com/${{ github.repository }}/releases/download/${{ steps.tag.outputs.tag }}/cloudflare-ai-${VERSION}.zip"
           echo "Download URL: $URL"
