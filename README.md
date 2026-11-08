@@ -2,7 +2,11 @@
 
 A PELDRUN provider package that adds [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) as an LLM backend. Ships a **native** adapter (not just an OpenAI-compatible manifest) so it can discover models, validate connections, and stream tokens against Cloudflare's `/ai/v1` and `/ai/models/search` endpoints directly.
 
-[![Validate](https://github.com/peldrun/peldrun-providers/actions/workflows/validate.yml/badge.svg)](https://github.com/peldrun/peldrun-providers/actions/workflows/validate.yml)
+
+[![Release](https://github.com/peldrunai/peldrun-provider-cloudflare-ai/actions/workflows/release.yml/badge.svg)](https://github.com/peldrunai/peldrun-provider-cloudflare-ai/actions/workflows/release.yml)
+
+[![Validate](https://github.com/peldrunai/peldrun-provider-cloudflare-ai/actions/workflows/validate.yml/badge.svg)](https://github.com/peldrunai/peldrun-provider-cloudflare-ai/actions/workflows/validate.yml)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
