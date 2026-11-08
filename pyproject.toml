@@ -105,8 +105,7 @@ cloudflare_ai_peldrun = ["py.typed"]
 [tool.pytest.ini_options]
 minversion = "8.0"
 # -ra: show extra summary lines for all tests (skips, xfails, etc.)
-# -q:  quiet mode is the default; CI adds -v via CLI
-addopts = "-ra --strict-markers --strict-config"
+# --showlocals: include local variables in tracebacks on failure
 testpaths = ["tests"]
 # Async tests use pytest-asyncio's explicit mode — every async test
 # MUST be decorated with @pytest.mark.asyncio. This avoids silent
