@@ -1,0 +1,19 @@
+# requirements.txt
+# Runtime dependencies for the Cloudflare Workers AI PELDRUN provider.
+#
+# IMPORTANT: version pins MUST align with PELDRUN's own top-level pins.
+# The isolated venv created by DependencyInstaller installs `peldrun`
+# transitively, which brings its own `openai` and `httpx` requirements.
+# Mismatched pins cause pip resolver conflicts at install time.
+#
+# Reference: backend/requirements.txt pins `openai>=2.50.0,<3.0.0`
+# and `httpx>=0.27,<0.28` at the project level.
+#
+# - openai: used as an OpenAI-compatible client against
+#           /client/v4/accounts/{account_id}/ai/v1/chat/completions
+# - httpx:  used for Cloudflare-specific endpoints
+#           (e.g. /client/v4/accounts/{account_id}/ai/models/search)
+#           because the OpenAI SDK does not expose arbitrary paths.
+
+openai>=2.50.0,<3.0.0
+httpx>=0.27,<0.28

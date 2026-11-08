@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "peldrun.llm_provider",
+  "id": "cloudflare-ai",
+  "name": "Cloudflare Workers AI",
+  "display_name": "Cloudflare AI",
+  "version": "1.0.0",
+  "description": "Cloudflare Workers AI provides serverless GPU inference for 50+ open-source models (Llama, Mistral, Qwen, DeepSeek, Kimi, Gemma) on Cloudflare's global network. Billed per neuron; free tier includes 10,000 neurons/day.",
+  "api_contract": "peldrun.llm.provider.v1",
+  "transport": "native",
+  "entry_point": "cloudflare_ai_peldrun.adapter:CloudflareAIAdapter",
+  "dependencies": [
+    "openai>=2.50.0,<3.0.0",
+    "httpx>=0.27,<0.28"
+  ],
+  "runtime": {
+    "type": "python",
+    "python": ">=3.12,<3.13"
+  },
+  "author": "PELDRUN Community",
+  "author_url": "https://github.com/peldrun/peldrun-providers",
+  "homepage": "https://developers.cloudflare.com/workers-ai/",
+  "license": "MIT",
+  "icon": "cloudflare",
+  "tags": [
+    "cloudflare",
+    "workers-ai",
+    "serverless",
+    "llama",
+    "mistral",
+    "qwen",
+    "deepseek",
+    "kimi",
+    "gemma"
+  ],
+  "connection_fields": [
+    {
+      "key": "account_id",
+      "label": "Cloudflare Account ID",
+      "type": "string",
+      "required": true,
+      "placeholder": "023e105f4ecef8ad9ca31a8372d0c353",
+      "pattern": "^[a-f0-9]{32}$",
+      "description": "Find it via `wrangler whoami` or in the Cloudflare dashboard URL (dash.cloudflare.com/<account_id>/...)."
+    },
+    {
+      "key": "api_key",
+      "label": "API Token",
+      "type": "password",
+      "required": true,
+      "description": "Create a token with the 'Workers AI Read' permission at dash.cloudflare.com/profile/api-tokens. Sent as Authorization: Bearer."
+    },
+    {
+      "key": "base_url",
+      "label": "Endpoint URL (auto-computed)",
+      "type": "url",
+      "required": false,
+      "description": "Leave empty. The adapter builds the endpoint from your Account ID automatically. Only override for advanced proxy setups."
+    }
+  ],
+  "runtime_hints": {
+    "requires_token_refresh": false,
+    "docs_url": "https://developers.cloudflare.com/workers-ai/get-started/rest-api/"
+  },
+  "model_facts": {
+    "@cf/meta/llama-3.3-70b-instruct-fp8-fast": {
+      "max_context_length": 24000,
+      "max_output_tokens": 8192,
+      "vision": false,
+      "tools": true,
+      "reasoning": false
+    },
+    "@cf/meta/llama-3.1-8b-instruct": {
+      "max_context_length": 32000,
+      "max_output_tokens": 8192,
+      "vision": false,
+      "tools": true,
+      "reasoning": false
+    },
+    "@cf/meta/llama-3.1-70b-instruct": {
+      "max_context_length": 24000,
+      "max_output_tokens": 8192,
+      "vision": false,
+      "tools": true,
+      "reasoning": false
+    },
+    "@cf/meta/llama-3.2-3b-instruct": {
+      "max_context_length": 131072,
+      "max_output_tokens": 4096,
+      "vision": false,
+      "tools": false,
+      "reasoning": false
+    },
+    "@cf/meta/llama-3.2-11b-vision-instruct": {
+      "max_context_length": 131072,
+      "max_output_tokens": 4096,
+      "vision": true,
+      "tools": false,
+      "reasoning": false
+    },
+    "@cf/meta/llama-3.2-90b-vision-instruct": {
+      "max_context_length": 131072,
+      "max_output_tokens": 4096,
+      "vision": true,
+      "tools": false,
+      "reasoning": false
+    },
+    "@cf/mistralai/mistral-small-3.1-24b-instruct": {
+      "max_context_length": 128000,
+      "max_output_tokens": 8192,
+      "vision": true,
+      "tools": true,
+      "reasoning": false
+    },
+    "@cf/mistral/mistral-7b-instruct-v0.1": {
+      "max_context_length": 32000,
+      "max_output_tokens": 4096,
+      "vision": false,
+      "tools": false,
+      "reasoning": false
+    },
+    "@cf/qwen/qwen2.5-coder-32b-instruct": {
+      "max_context_length": 32768,
+      "max_output_tokens": 8192,
+      "vision": false,
+      "tools": true,
+      "reasoning": false
+    },
+    "@cf/qwen/qwq-32b": {
+      "max_context_length": 32768,
+      "max_output_tokens": 8192,
+      "vision": false,
+      "tools": false,
+      "reasoning": true
+    },
+    "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b": {
+      "max_context_length": 80000,
+      "max_output_tokens": 16384,
+      "vision": false,
+      "tools": false,
+      "reasoning": true
+    },
+    "@cf/moonshotai/kimi-k2.5": {
+      "max_context_length": 256000,
+      "max_output_tokens": 8192,
+      "vision": true,
+      "tools": true,
+      "reasoning": true
+    },
+    "@cf/google/gemma-3-12b-it": {
+      "max_context_length": 128000,
+      "max_output_tokens": 8192,
+      "vision": true,
+      "tools": false,
+      "reasoning": false
+    }
+  },
+  "features": {
+    "model_discovery": true,
+    "native_streaming": true,
+    "buffered_streaming": true,
+    "tool_calling": true,
+    "parallel_tool_calls": false,
+    "forced_tool_choice": false,
+    "vision": true,
+    "audio": false,
+    "structured_output": true,
+    "usage_reporting": true,
+    "reasoning": true
+  },
+  "permissions": {
+    "network": "connection_endpoint",
+    "secrets": [
+      "connection.api_key"
+    ],
+    "workspace_access": false,
+    "shell_execute": false
+  }
+}

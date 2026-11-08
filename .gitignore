@@ -218,3 +218,50 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+ 
+# --- Python bytecode / caches ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Packaging / distribution output ---
+dist/
+build/
+*.egg-info/
+.eggs/
+*.zip
+
+# --- Test / coverage artifacts ---
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# --- Type-checker / linter caches ---
+.mypy_cache/
+.ruff_cache/
+
+# --- IDE / OS noise ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Local-only secrets (never commit) ---
+.env
+.env.*
+*.local
+
+# --- Project-specific bootstrap tool ---
+# scaffold.ps1 is a one-time local initializer; it must not ship in the release ZIP.
+scaffold.ps1
