@@ -4,7 +4,7 @@
   "id": "cloudflare-ai",
   "name": "Cloudflare Workers AI",
   "display_name": "Cloudflare AI",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cloudflare Workers AI provides serverless GPU inference for 50+ open-source models (Llama, Mistral, Qwen, DeepSeek, Kimi, Gemma) on Cloudflare's global network. Billed per neuron; free tier includes 10,000 neurons/day.",
   "api_contract": "peldrun.llm.provider.v1",
   "transport": "native",

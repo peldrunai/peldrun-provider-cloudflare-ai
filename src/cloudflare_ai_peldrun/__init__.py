@@ -28,4 +28,4 @@ See ``manifest.json`` for the complete provider declaration and
 from .adapter import CloudflareAIAdapter
 
 __all__ = ["CloudflareAIAdapter"]
-__version__ = "1.0.0"
+__version__ = "1.0.1"

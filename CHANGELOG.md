@@ -10,6 +10,12 @@ Each release section is prepended by `scripts/update_version.py`.
 Contributors MUST fill in the placeholder bullets before tagging a
 release — see CONTRIBUTING.md.
 
+## [1.0.1] - 2026-11-08
+
+### Fixed
+
+- **ci**: extract single SHA-256 line; drop pytest-asyncio config (ee4822c)
+
 ## [Unreleased]
 
 ### Planned

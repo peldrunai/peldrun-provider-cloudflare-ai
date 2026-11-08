@@ -27,7 +27,7 @@ build-backend = "setuptools.build_meta"
 name = "cloudflare-ai-peldrun"
 # IMPORTANT: keep in sync with manifest.json["version"].
 # scripts/update_version.py rewrites both files together.
-version = "1.0.0"
+version = "1.0.1"
 description = "Cloudflare Workers AI provider adapter for PELDRUN"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
