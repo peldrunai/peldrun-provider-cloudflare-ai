@@ -10,6 +10,12 @@ Each release section is prepended by `scripts/update_version.py`.
 Contributors MUST fill in the placeholder bullets before tagging a
 release — see CONTRIBUTING.md.
 
+## [1.0.3] - 2026-11-08
+
+### Changed
+- Version bump to 1.0.3. No commit log was available (not a git repository, shallow clone, or no Conventional Commits in the range). Fill in the highlights for this release before tagging.
+
+
 ## [1.0.2] - 2026-11-08
 
 ### Fixed

@@ -220,6 +220,13 @@ class CloudflareAIAdapter:
             f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai"
         )
 
+        # IMPORTANT: The PELDRUN runtime enforcer uses `connection.base_url` 
+        # to build the network allowlist. If it's empty, it blocks ALL 
+        # network I/O. Since we compute the base URL dynamically from 
+        # account_id, we MUST inject it here so the enforcer allows the call.
+        if not self._connection.base_url:
+            self._connection.base_url = self._api_base
+
         self._timeout = float(self._connection.timeout or 120.0)
 
         # OpenAI-compatible client for chat completions.
